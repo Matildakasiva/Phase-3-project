@@ -1,12 +1,14 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import SideNavbar from "./Components/SideNavbar"
+import React from 'react';
+import SideNavbar from "./Components/SideNavbar";
+import VentureLog from './Routing/VentureLog';
 
 function App() {
   return (
     <>
-      <SideNavbar/>
+      <SideNavbar />
+      <VentureLog/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
