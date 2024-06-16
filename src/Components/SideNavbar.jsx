@@ -25,7 +25,6 @@ function SideNavbar() {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                <NavLink to="/Details" className="nav-link">Destination Details</NavLink>
                 <NavLink to="/Jotting" className="nav-link">Plans</NavLink>
                 <NavLink to="/DailyLogs" className="nav-link">Travel Journal</NavLink>
                 </Nav>
@@ -40,7 +39,7 @@ function SideNavbar() {
                 </Form>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
-            <Navbar.Brand  as={NavLink} to="/" className="me-auto">VentureLog</Navbar.Brand>
+            <Navbar.Brand  as={NavLink} to="/" className="me-auto">Venture</Navbar.Brand>
           </Container>
         </Navbar>
       ))}

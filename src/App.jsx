@@ -1,12 +1,11 @@
-import React from 'react';
 import SideNavbar from "./Components/SideNavbar";
-import VentureLog from './Routing/VentureLog';
+import Venture from './Routing/Venture';
 
 function App() {
   return (
     <>
       <SideNavbar />
-      <VentureLog/>
+      <Venture/>
     </>
   );
 }

@@ -2,13 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import Logs from "./Logs";
 import Details from "./Details";
 import NoteTaking from "./NoteTaking";
-import VentureLog from "./VentureLog";
+import Venture from "./Venture";
 
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <VentureLog/>
+        element: <Venture/>
     },
     {
         path: '/DailyLogs',

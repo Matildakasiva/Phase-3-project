@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import NotesList from '../Components/NoteList';
 import { Container, Row, Col } from 'react-bootstrap';
 import SideNavbar from '../Components/SideNavbar';
+import Check from '../Components/PackingList';
 
 
 const NoteTaking = () => {
@@ -61,6 +62,9 @@ const NoteTaking = () => {
   return (
     <div>
       <SideNavbar/>
+      <div>
+        <Check/>
+      </div>
        <div className="bg-beige">
       <Container className="mt-3">
         <Row>
@@ -73,7 +77,7 @@ const NoteTaking = () => {
           </Col>
         </Row>
       </Container>
-    </div>
+      </div>
     </div>
     
   );

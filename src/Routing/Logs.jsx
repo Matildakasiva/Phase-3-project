@@ -1,12 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import SideNavbar from "../Components/SideNavbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
+import { BASE_URL } from "../utils";
 
 function Logs() {
   const [entries, setEntries] = useState([]);
   const [newEntry, setNewEntry] = useState("");
   const [editingEntry, setEditingEntry] = useState(null);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/journal_entries`)
+    .then(res => res.json())
+    .then(data => setEntries(data))
+  }, [])
 
   const handleAddEntry = () => {
     if (editingEntry!== null) {
