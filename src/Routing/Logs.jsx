@@ -18,51 +18,24 @@ function Logs() {
   }, [])
 
   const handleAddEntry = () => {
-    if (editingEntry !== null) {
+    if (editingEntry!== null) {
       // Update existing entry
-      fetch(`${BASE_URL}/journal_entries/${editingEntry}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ entry: newEntry }),
-      })
-      .then(res => res.json())
-      .then(data => {
-        setEntries(
-          entries.map((entry, i) =>
-            i === editingEntry ? data : entry
-          )
-        );
-        setNewEntry("");
-        setEditingEntry(null);
-      })
-      .catch(error => console.error('Error:', error))
+      setEntries(
+        entries.map((entry, i) =>
+          i === editingEntry? newEntry : entry
+        )
+      );
     } else {
       // Add new entry
-      fetch(`${BASE_URL}/journal_entries`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ entry: newEntry }),
-      })
-      .then(res => res.json())
-      .then(data => {
-        setEntries([...entries, data]);
-        setNewEntry("");
-      })
-      .catch(error => console.error('Error:', error))
+      setEntries([...entries, newEntry]);
     }
+    setNewEntry("");
+    setEditingEntry(null);
   };
 
   const handleDeleteEntry = (index) => {
-    fetch(`${BASE_URL}/journal_entries/${editingEntry}`, {
-      method: 'DELETE',
-    })
-    .then(res => res.json())
-    .then(() => {
-      setEntries(entries.filter((entry, i) => i !== index));
-    })
-    .catch(error => console.error('Error:', error))
+    setEntries(entries.filter((entry, i) => i!== index));
   };
-
 
   const handleEditEntry = (index) => {
     setNewEntry(entries[index]);
