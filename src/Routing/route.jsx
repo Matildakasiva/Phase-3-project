@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Logs from "./Logs";
 import Details from "./Details";
-import NoteTaking from "./NoteTaking";
+import Calendar from "../Components/Calender";
 import Venture from "./Venture";
 
 
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
         element: <Details/>
     },
     {
-        path: '/Jotting',
-        element: <NoteTaking/>
+        path: '/Plan',
+        element: <Calendar/>
     }
 ])
 

@@ -1,34 +1,45 @@
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import { useState } from "react";
+import { useState } from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import SideNavbar from './SideNavbar';
 
-function Calender() {
+function Calendar() {
   const [events, setEvents] = useState([]);
 
-  function renderEventContent(eventInfo) {
-    return (
-      <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
-      </>
-    );
-  }
-
-  function handleSelect(info) {
-    const title = prompt("Enter event title");
+  function handleDateClick(dateClickInfo) {
+    const title = prompt('Enter event title');
     if (title) {
       const newEvent = {
         title,
-        start: info.startStr,
-        end: info.endStr,
+        start: dateClickInfo.dateStr,
+        end: dateClickInfo.dateStr,
       };
       setEvents((prevEvents) => [...prevEvents, newEvent]);
     }
   }
 
+  function handleEventClick(eventClickInfo) {
+    const eventId = eventClickInfo.event.id;
+    const event = events.find((event) => event.id === eventId);
+    if (event) {
+      const newTitle = prompt('Edit event title', event.title);
+      if (newTitle) {
+        setEvents((prevEvents) =>
+          prevEvents.map((e) => (e.id === eventId ? { ...e, title: newTitle } : e))
+        );
+      } else {
+        setEvents((prevEvents) => prevEvents.filter((e) => e.id !== eventId));
+      }
+    }
+  }
+
   return (
+    <div>
+      <div>
+        <SideNavbar/>
+      </div>
     <div className="container py-5">
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -38,13 +49,16 @@ function Calender() {
           center: "title",
           end: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
-        eventContent={renderEventContent}
         events={events}
+        dateClick={handleDateClick}
+        eventClick={handleEventClick}
+        editable={true}
         selectable={true}
-        select={handleSelect}
       />
     </div>
+    </div>
+    
   );
 }
 
-export default Calender;
+export default Calendar;

@@ -20,10 +20,11 @@ function Venture() {
   }, []);
 
   return (
-    <div className="container py-5">
+    <div >
       <div>
         <SideNavbar />
-      </div>
+      </div >
+      <div className="container py-5">
       <div className="row justify-content-center">
         {data.map((item) => (
           <div key={item.id} className="col-md-4 mb-4">
@@ -40,7 +41,7 @@ function Venture() {
                 <div className="d-flex justify-content-between">
                   <Button
                     variant="outline-secondary"
-                    href="/Jotting"
+                    href="/Plan"
                     className="mr-2"
                   >
                     Plan this trip
@@ -56,6 +57,8 @@ function Venture() {
           </div>
         ))}
       </div>
+      </div>
+      
     </div>
   );
 }

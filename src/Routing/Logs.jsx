@@ -2,6 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SideNavbar from "../Components/SideNavbar";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card, ListGroup } from "react-bootstrap";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { BASE_URL } from "../utils";
 
 function Logs() {
@@ -11,29 +13,56 @@ function Logs() {
 
   useEffect(() => {
     fetch(`${BASE_URL}/journal_entries`)
-    .then(res => res.json())
-    .then(data => setEntries(data))
+   .then(res => res.json())
+   .then(data => setEntries(data))
   }, [])
 
   const handleAddEntry = () => {
-    if (editingEntry!== null) {
+    if (editingEntry !== null) {
       // Update existing entry
-      setEntries(
-        entries.map((entry, i) =>
-          i === editingEntry? newEntry : entry
-        )
-      );
+      fetch(`${BASE_URL}/journal_entries/${editingEntry}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entry: newEntry }),
+      })
+      .then(res => res.json())
+      .then(data => {
+        setEntries(
+          entries.map((entry, i) =>
+            i === editingEntry ? data : entry
+          )
+        );
+        setNewEntry("");
+        setEditingEntry(null);
+      })
+      .catch(error => console.error('Error:', error))
     } else {
       // Add new entry
-      setEntries([...entries, newEntry]);
+      fetch(`${BASE_URL}/journal_entries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entry: newEntry }),
+      })
+      .then(res => res.json())
+      .then(data => {
+        setEntries([...entries, data]);
+        setNewEntry("");
+      })
+      .catch(error => console.error('Error:', error))
     }
-    setNewEntry("");
-    setEditingEntry(null);
   };
 
   const handleDeleteEntry = (index) => {
-    setEntries(entries.filter((entry, i) => i!== index));
+    fetch(`${BASE_URL}/journal_entries/${editingEntry}`, {
+      method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(() => {
+      setEntries(entries.filter((entry, i) => i !== index));
+    })
+    .catch(error => console.error('Error:', error))
   };
+
 
   const handleEditEntry = (index) => {
     setNewEntry(entries[index]);
@@ -56,24 +85,28 @@ function Logs() {
               <Form>
                 <Form.Group controlId="newEntry">
                   <Form.Label>Write your thoughts...</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={10}
-                    cols={50}
-                    wrap="hard"
+                  <ReactQuill
                     value={newEntry}
-                    onChange={(e) => setNewEntry(e.target.value)}
+                    onChange={(content, delta, source, editor) => setNewEntry(editor.getHTML())}
                     placeholder="Start writing..."
-                    style={{
-                      backgroundImage: "linear-gradient(to bottom, #ccc 1px, transparent 1px)",
-                      backgroundSize: "100% 20px"
+                    modules={{
+                      toolbar: [
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                        ['bold', 'italic', 'underline', 'trike'],
+                        ['link', 'image'],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        ['clean'],
+                      ],
                     }}
+                    style={{ height: '300px', width: '100%' }}
                   />
                 </Form.Group>
+                <br /> <br />
                 <Button 
-                variant="primary" 
+                variant="outline-secondary" 
                 onClick={handleAddEntry}
                 style={{ fontSize: 18, padding: 10 }}>
+
                   {editingEntry!== null? "Update Entry" : "Add Entry"}
                 </Button>
               </Form>
@@ -88,7 +121,7 @@ function Logs() {
               <ListGroup variant="flush">
                 {entries.map((entry, index) => (
                   <ListGroup.Item key={index} style={{ padding: 10 }}>
-                    <p style={{ fontSize: 18 }}>{entry}</p>
+                    <div dangerouslySetInnerHTML={{ __html: entry }} />
                     <Button
                       variant="danger"
                       onClick={() => handleDeleteEntry(index)}

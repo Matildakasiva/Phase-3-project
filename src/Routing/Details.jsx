@@ -20,10 +20,11 @@ function Details() {
   }, [id]);
 
   return (
-    <div className="container py-5" >
+    <div >
       <div>
         <SideNavbar />
       </div>
+      <div className="container py-5" >
       <div className="row justify-content-center">
         {data && (
           <div className="col-md-4 mb-4">
@@ -46,7 +47,7 @@ function Details() {
                   <strong> Vehicle-rentals:</strong> {data.vehicle_rentals}
                 </Card.Text>
                 <div className="d-flex justify-content-between">
-                  <Button variant="outline-secondary" href="/Jotting" className="mr-2">
+                  <Button variant="outline-secondary" href="/Plan" className="mr-2">
                     Plan this trip
                   </Button>
                   <Button variant="outline-secondary" href="/">
@@ -58,6 +59,8 @@ function Details() {
           </div>
         )}
       </div>
+      </div>
+     
     </div>
   );
 }
