@@ -1,28 +1,39 @@
+# Project Title: VentureLog
+================
+
+## Description
+This project is designed for people who like to travel or plan to travel. It has a few features. 
+The features are a card layout to present the destination, a calendar to plan and a Journal entry.
+The user can perform the following functions: 
+   1. View a list of destinations and their details in a card layout format
+   2. Plan out their travels in their calendar
+   3. Write down journal entries to keep track of their travels.
+
+## Live Links
+* [Deployed ](https://phase-3-project-cyan.vercel.app/)
+* [Backend](https://github.com/Matildakasiva/Phase-3-Project-backend)
 
 
-Phase 3 project.
-By Matilda Ogari
 
-Description
-This is a project. A react frontend and python fastApi backend. 
-The user can view various travel destinations and their details. 
-The user is added to add their travel plan onto their calendar.
-The user is also able to add journal entries.
+## Installation
+### Prerequisites
+* Python
+* Vite app
+* React bootstrap
+* FullCalender
 
-Installation Requirements
-Git
 
-Installation instruction
-Git clone https://github.com/Matildakasiva/SA.02-WK2-Code-Challenge.git
-Live Link
-[Git]([https://phase-3-project-cyan.vercel.app/])
-[Backend Repository]([https://github.com/Matildakasiva/Phase-3-Project-backend])
+## Usage
+### Running the Application
+* Open a web browser and navigate to `http://localhost:8000`
 
-Technologies used
-Reactjs, React-bootstrap, python
-
-Support and contact details
-github.com/Matildakasiva
+### API Endpoints
+* /destination
+* /journal_entry
+* /details
 
 License
-The content of this site is licensed under the MIT license Copyright (c) 2018.
+This project is licensed under the MIT License. See LICENSE for details.
+
+Authors
+Matilda Kasiva
