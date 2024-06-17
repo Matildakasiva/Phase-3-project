@@ -10,7 +10,7 @@ The user can perform the following functions:
    3. Write down journal entries to keep track of their travels.
 
 ## Live Links
-* [Deployed ](https://phase-3-project-cyan.vercel.app/)
+* [Demo ](https://drive.google.com/file/d/19aqZWkQbeTHyedrCIx0T07s2eZLXOyad/view?usp=sharing)
 * [Backend](https://github.com/Matildakasiva/Phase-3-Project-backend)
 
 
