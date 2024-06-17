@@ -4,6 +4,8 @@ import SideNavbar from "../Components/SideNavbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BASE_URL } from "../utils";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 
 function Venture() {
   const [data, setData] = useState([]);
@@ -43,8 +45,10 @@ function Venture() {
                   >
                     Plan this trip
                   </Button>
-                  <Button variant="outline-secondary" href="/Details">
+                  <Button variant="outline-secondary" >
+                    <Link to={`/Details/${item.id}`} >
                     Destination Details
+                  </Link>
                   </Button>
                 </div>
               </Card.Body>

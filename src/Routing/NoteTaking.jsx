@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import NotesList from '../Components/NoteList';
 import { Container, Row, Col } from 'react-bootstrap';
 import SideNavbar from '../Components/SideNavbar';
-import Check from '../Components/PackingList';
+import Check from '../Components/Calender';
 
 
 const NoteTaking = () => {
